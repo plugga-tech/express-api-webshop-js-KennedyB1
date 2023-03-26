@@ -13,7 +13,7 @@ POST http://localhost:3000/api/users/
 Content-Type: application/json
 
 {
-  "id": "641efca778212e2fd5599562"
+  "id": "64208d59fd7403decb9b1720"
 }
 
 ###
@@ -60,7 +60,7 @@ POST http://localhost:3000/api/products/
 Content-Type: application/json
 
 {
-  "id": "641f76bc877c2603c81ed534"
+  "id": "64208d67fd7403decb9b1721"
 }
 
 
@@ -88,14 +88,14 @@ POST http://localhost:3000/api/orders/add
 Content-Type: application/json
 
 {
-  "user": "64206a1d11884abb147ab906",
+  "user": "64208d59fd7403decb9b1720",
       "products": [
     {
-      "productId": "64207a25ca4475e973869363",
+      "productId": "64208d67fd7403decb9b1721",
       "quantity": 1
     },
     {
-      "productId": "64207a25ca4475e973869363",
+      "productId": "64208d67fd7403decb9b1721",
       "quantity": 2
     }
   ]

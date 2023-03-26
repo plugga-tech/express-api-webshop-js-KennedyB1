@@ -35,7 +35,8 @@ router.post('/', function (req, res, next) {
             const userObject = {
                 id: user._id.toString(),
                 name: user.name,
-                email: user.email
+                email: user.email,
+                password: user.password
             };
 
             res.send(userObject);
