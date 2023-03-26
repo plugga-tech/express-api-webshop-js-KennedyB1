@@ -13,7 +13,7 @@ POST http://localhost:3000/api/users/
 Content-Type: application/json
 
 {
-  "id": "// EN USER ID"
+  "id": "641efca778212e2fd5599562"
 }
 
 ###
@@ -35,8 +35,8 @@ POST http://localhost:3000/api/users/login
 Content-Type: application/json
 
 {
-  "email": "// EN USER EMAIL",
-  "password": "// EN USER EMAIL"
+  "email": "test@mail.com",
+  "password": "test"
 }
 
 ###
@@ -53,11 +53,20 @@ GET http://localhost:3000/api/products
 ###
 
 // HÄMTA SPECIFIK PRODUKT
-GET http://localhost:3000/api/products/ // ID PÅ PRODUKT
+//GET http://localhost:3000/api/products/ // ID PÅ PRODUKT
+
+
+POST http://localhost:3000/api/products/
+Content-Type: application/json
+
+{
+  "id": "641f76bc877c2603c81ed534"
+}
+
 
 ###
 
-// SKAPA PRODUKT
+// SKAPA PRODUKT    
 POST http://localhost:3000/api/products/add
 Content-Type: application/json
 
@@ -79,20 +88,23 @@ POST http://localhost:3000/api/orders/add
 Content-Type: application/json
 
 {
-  "user": "{{getUsers.response.body.$[0].id}}",
+  "user": "64206a1d11884abb147ab906",
       "products": [
     {
-      "productId": "// ID PÅ EN PRODUKT",
+      "productId": "64207a25ca4475e973869363",
       "quantity": 1
     },
     {
-      "productId": "// ID PÅ EN PRODUKT",
+      "productId": "64207a25ca4475e973869363",
       "quantity": 2
     }
   ]
 }
 
-###
+
+### 
+
+
 
 
 // HÄMTA ALLA ORDERS
