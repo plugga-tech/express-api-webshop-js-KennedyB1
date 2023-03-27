@@ -32,7 +32,7 @@ router.post('/', function (req, res, next) {
     req.app.locals.db.collection('products').findOne({ _id: new ObjectId(id) })
         .then(product => {
             if (!product) {
-                return res.status(404).send({ message: 'Product not found' });
+                return res.status(404).send({ message: 'Produkt hittades ej' });
             }
 
             const productObject = {

@@ -10,11 +10,11 @@ router.post('/', function (req, res, next) {
     req.app.locals.db.collection("users").findOne({ email, password })
         .then(user => {
             if (!user) {
-                return res.status(401).send("Invalid email or password.");
+                return res.status(401).send("Fel email eller lösenord");
             }
 
-            console.log("User logged in:", user.name);
-            res.send("Login successful.");
+            console.log("Loggade in som:", user.name);
+            res.send("Inloggning funkade");
         })
         .catch(next);
 });

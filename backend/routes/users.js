@@ -23,13 +23,13 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
     const id = req.body.id;
     if (!id) {
-        return res.status(400).send({ message: 'Missing ID parameter' });
+        return res.status(400).send({ message: 'Hittade inte ID' });
     }
 
     req.app.locals.db.collection('users').findOne({ _id: new ObjectId(id) })
         .then(user => {
             if (!user) {
-                return res.status(404).send({ message: 'User not found' });
+                return res.status(404).send({ message: 'Användaren hittades ej' });
             }
 
             const userObject = {
