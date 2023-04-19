@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ###
 
-// SKAPA USER
+// SKAPA USER 
 POST http://localhost:3000/api/users/add
 Content-Type: application/json
 
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-// LOGGA IN USER
+// LOGGA IN USER 
 POST http://localhost:3000/api/users/login
 Content-Type: application/json
 
@@ -52,10 +52,12 @@ GET http://localhost:3000/api/products
 
 ###
 
-// HÄMTA SPECIFIK PRODUKT
-//GET http://localhost:3000/api/products/ // ID PÅ PRODUKT
+// HÄMTA SPECIFIK PRODUKT // ID PÅ PRODUKT
+GET http://localhost:3000/api/products/64208d67fd7403decb9b1721
 
 
+###
+// Lägg till specefik produkt
 POST http://localhost:3000/api/products/
 Content-Type: application/json
 
@@ -66,7 +68,7 @@ Content-Type: application/json
 
 ###
 
-// SKAPA PRODUKT    
+// SKAPA PRODUKT 
 POST http://localhost:3000/api/products/add
 Content-Type: application/json
 

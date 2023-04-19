@@ -20,7 +20,28 @@ router.get('/', function (req, res, next) {
         })
         .catch(next);
 });
-//
+
+
+router.get('/:id', function (req, res) {
+    console.log(req.params.id);
+    req.app.locals.db.collection("products").findOne({ "_id": new ObjectId(req.params.id) })
+        .then(result => {
+            console.log(result);
+            if (!result) {
+                return res.status(404).send("Product not found");
+            }
+            const product = {
+                name: result.name,
+                description: result.description,
+                id: result._id,
+                price: result.price,
+                lager: result.lager,
+            };
+            res.send(product);
+        })
+});
+
+
 
 
 router.post('/', function (req, res, next) {
@@ -47,5 +68,7 @@ router.post('/', function (req, res, next) {
         })
         .catch(next);
 });
+
+
 
 module.exports = router;
