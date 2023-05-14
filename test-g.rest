@@ -76,7 +76,8 @@ Content-Type: application/json
   "name": "Produkt 1",
   "description": "Beskrivning av produkt 1",
   "price": 100, 
-  "lager": 10
+  "lager": 30
+  
 }
 
 ###
@@ -94,7 +95,7 @@ Content-Type: application/json
       "products": [
     {
       "productId": "64208d67fd7403decb9b1721",
-      "quantity": 1
+      "quantity": 5
     },
     {
       "productId": "64208d67fd7403decb9b1721",

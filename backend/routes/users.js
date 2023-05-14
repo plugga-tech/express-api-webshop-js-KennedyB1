@@ -21,28 +21,29 @@ router.get('/', function (req, res, next) {
 //////////////////
 
 router.post('/', function (req, res, next) {
-    const id = req.body.id;
-    if (!id) {
+    const userId = req.body.id;
+    if (!userId) {
         return res.status(400).send({ message: 'Hittade inte ID' });
     }
 
-    req.app.locals.db.collection('users').findOne({ _id: new ObjectId(id) })
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({ message: 'Användaren hittades ej' });
+    req.app.locals.db.collection('orders').findOne({ user: userId })
+        .then(order => {
+            if (!order) {
+                return res.status(404).send({ message: 'Användaren har inga ordrar' });
             }
 
             const userObject = {
-                id: user._id.toString(),
-                name: user.name,
-                email: user.email,
-                password: user.password
+                id: order.user,
+                orders: order.products
             };
 
             res.send(userObject);
         })
         .catch(next);
 });
+
+
+
 
 
 

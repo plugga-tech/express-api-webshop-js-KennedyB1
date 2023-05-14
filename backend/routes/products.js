@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { ObjectId } = require('mongodb');
 
-
+// All
 router.get('/', function (req, res, next) {
     req.app.locals.db.collection("products").find().toArray()
         .then(results => {
@@ -22,26 +22,27 @@ router.get('/', function (req, res, next) {
 });
 
 
-router.get('/:id', function (req, res) {
-    console.log(req.params.id);
-    req.app.locals.db.collection("products").findOne({ "_id": new ObjectId(req.params.id) })
+router.get('/:productId', function (req, res, next) {
+    const productId = req.params.productId;
+    console.log(productId);
+
+    req.app.locals.db.collection("products").findOne({ "id": new ObjectId(productId) })
         .then(result => {
-            console.log(result);
-            if (!result) {
-                return res.status(404).send("Product not found");
+            if (result == null) {
+                res.status(404).json("Can't find products with ID " + productId)
+            } else {
+                const productObject = {
+                    name: result.name,
+                    description: result.description,
+                    id: productId,
+                    price: result.price,
+                    lager: result.lager,
+                };
+                res.status(200).json(productObject);
             }
-            const product = {
-                name: result.name,
-                description: result.description,
-                id: result._id,
-                price: result.price,
-                lager: result.lager,
-            };
-            res.send(product);
         })
+        .catch(next);
 });
-
-
 
 
 router.post('/', function (req, res, next) {
@@ -50,24 +51,37 @@ router.post('/', function (req, res, next) {
         return res.status(400).send({ message: 'Missing ID parameter' });
     }
 
-    req.app.locals.db.collection('products').findOne({ _id: new ObjectId(id) })
-        .then(product => {
-            if (!product) {
-                return res.status(404).send({ message: 'Produkt hittades ej' });
+    const productObject = {
+        id: new ObjectId(id),
+        name: 'Produkt 2',
+        description: 'Beskrivning av produkt 2',
+        price: 10,
+        lager: 15,
+    };
+
+    req.app.locals.db.collection('products').findOne({ id: productObject.id })
+        .then(existingProduct => {
+            if (existingProduct) {
+                return req.app.locals.db.collection('products').findOneAndUpdate(
+                    { id: productObject.id },
+                    { $inc: { lager: productObject.lager } },
+                    { returnOriginal: false }
+                );
+
+            } else {
+                return req.app.locals.db.collection('products').insertOne(productObject);
             }
-
-            const productObject = {
-                name: product.name,
-                description: product.description,
-                id: product._id,
-                price: product.price,
-                lager: product.lager,
-            };
-
-            res.send(productObject);
+        })
+        .then(result => {
+            res.status(201).send(` '${req.body.id}' är nu tilllagd! `);
         })
         .catch(next);
 });
+
+
+
+
+
 
 
 
